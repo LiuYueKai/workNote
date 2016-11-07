@@ -1,9 +1,15 @@
 <a name="3.1.6"></a>
-## [3.1.6](https://github.com/iuap-design/tinper-neoui/compare/v1.0.2...v3.1.6) (2016-11-07)
+## [3.1.6](https://github.com/iuap-design/tinper-neoui/compare/v1.0.3...v3.1.6) (2016-11-07)
+
+
+
+<a name="1.0.3"></a>
+## [1.0.3](https://github.com/iuap-design/tinper-neoui/compare/v1.0.2...v1.0.3) (2016-11-07)
 
 
 ### Bug Fixes
 
+* 44 ([de3ef36](https://github.com/iuap-design/tinper-neoui/commit/de3ef36))
 * test3 ([f49d72f](https://github.com/iuap-design/tinper-neoui/commit/f49d72f))
 * test33 ([140ed52](https://github.com/iuap-design/tinper-neoui/commit/140ed52))
 
