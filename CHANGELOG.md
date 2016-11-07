@@ -5,6 +5,7 @@
 ### Bug Fixes
 
 * test2 ([2dcc6de](https://github.com/iuap-design/tinper-neoui/commit/2dcc6de))
+* test3 ([f49d72f](https://github.com/iuap-design/tinper-neoui/commit/f49d72f))
 
 
 ### Features
