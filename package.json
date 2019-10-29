@@ -45,7 +45,7 @@
     "browser-sync": "^2.12.8",
     "chai": "^3.5.0",
     "cz-conventional-changelog": "^1.2.0",
-    "eslint": "^3.2.2",
+    "eslint": "^4.19.1",
     "eslint-loader": "^1.5.0",
     "file": "^0.2.2",
     "gulp": "^3.9.1",
