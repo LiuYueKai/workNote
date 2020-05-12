@@ -7,7 +7,7 @@
   <title>Document</title>
   <style>
     .tree{
-      width: 3000px;
+      width: 7000px;
     }
     .tree ul {
       padding-top: 20px;
@@ -61,6 +61,12 @@ any siblings*/
       padding-top: 0;
     }
 
+    .tree li li:only-child {
+      float: none;
+    }
+
+    
+
     /*Remove left connector from first child and  
 right connector from last child*/
     .tree li:first-child::before,
@@ -112,15 +118,59 @@ right connector from last child*/
       transition: all 0.5s;
       -webkit-transition: all 0.5s;
       -moz-transition: all 0.5s;
+
+      box-sizing: border-box;
     }
+
+    .tree li a.has_wife{
+      width: 700px;
+      border: 0px;
+      padding: 0px;
+    }
+
+    .tree li a.has_wife div{
+      width: 200px;
+      height: 100px;
+      box-sizing: border-box;
+      position: relative;
+
+      border: 1px solid #ccc;
+      padding: 5px 10px;
+      text-decoration: none;
+      color: #666;
+      font-family: arial, verdana, tahoma;
+      font-size: 11px;
+      display: inline-block;
+
+      border-radius: 5px;
+      -webkit-border-radius: 5px;
+      -moz-border-radius: 5px;
+    }
+
+    .tree li a.has_wife .husband{
+      left: 100px;
+    }
+
+    .tree li a.has_wife .wife{
+      left: 149px;
+    }
+
 
     /*Time for some hover effects*/
     /*We will apply the hover effect the the lineage of the element also*/
     .tree li a:hover,
-    .tree li a:hover+ul li a {
+    .tree li a.has_wife:hover div,
+    .tree li a:hover+ul li a,
+    .tree li a:hover+ul li a.has_wife div{
       background: #c8e4f8;
       color: #000;
       border: 1px solid #94a0b4;
+    }
+
+    .tree li a.has_wife:hover,
+    .tree li a:hover+ul li a.has_wife{
+      background: none;
+      border: 0px;
     }
 
     /*Connector styles on hover*/
@@ -140,7 +190,8 @@ right connector from last child*/
         <a href="#">Parent</a>
         <ul>
           <li>
-            <a href="#">Child</a>
+            <!-- <a href="#">Child</a> -->
+            <a href="#" class="has_wife"><div class="husband">Child</div><div class="wife">Child-wife</div></a>
             <ul>
               <li><a href="#">Grand Child</a></li>
             </ul>
@@ -148,16 +199,25 @@ right connector from last child*/
           <li>
             <a href="#">Child</a>
             <ul>
-              <li><a href="#">Grand Child</a></li>
+              <li>
+                <!-- <a href="#">Grand Child</a> -->
+                <a href="#" class="has_wife"><div class="husband">Grand Child</div><div class="wife">Grand Child-wife</div></a>
+              </li>
               <li>
                 <a href="#">Grand Child</a>
                 <ul>
-                  <li><a href="#">Great Grand Child</a></li>
+                  <li>
+                    <!-- <a href="#">Great Grand Child</a> -->
+                    <a href="#" class="has_wife"><div class="husband">Great Grand Child</div><div class="wife">Great Grand Child-wife</div></a>
+                  </li>
                   <li><a href="#">Great Grand Child</a></li>
                   <li><a href="#">Great Grand Child</a></li>
                 </ul>
               </li>
-              <li><a href="#">Grand Child</a></li>
+              <li>
+                <a href="#">Grand Child</a>
+                <!-- <a href="#" class="has_wife"><div class="husband">Grand Child</div><div class="wife">Grand Child-wife</div></a> -->
+              </li>
             </ul>
           </li>
         </ul>
