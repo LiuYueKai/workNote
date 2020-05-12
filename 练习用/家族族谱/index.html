@@ -43,6 +43,11 @@
       height: 20px;
     }
 
+    .tree li.has_wife::after{
+      width: calc(50% + 130px);
+      left: calc(50% - 130px);
+    }
+
     .tree li::after {
       right: auto;
       left: 50%;
@@ -59,11 +64,10 @@ any siblings*/
     /*Remove space from the top of single children*/
     .tree li:only-child {
       padding-top: 0;
+      position: absolute;
+      left: 0px;  
     }
 
-    .tree li li:only-child {
-      float: none;
-    }
 
     
 
@@ -99,6 +103,12 @@ right connector from last child*/
       height: 20px;
     }
 
+    .tree ul .has_wife > ul::before {
+      left: calc(50% - 130px);
+      top: -5px;
+      height: 25px;
+    }
+
     .tree li a {
       border: 1px solid #ccc;
       padding: 5px 10px;
@@ -123,16 +133,17 @@ right connector from last child*/
     }
 
     .tree li a.has_wife{
-      width: 700px;
+      width: 450px;
       border: 0px;
       padding: 0px;
+      position: relative;
     }
 
     .tree li a.has_wife div{
       width: 200px;
       height: 100px;
       box-sizing: border-box;
-      position: relative;
+      position: absolute;
 
       border: 1px solid #ccc;
       padding: 5px 10px;
@@ -147,12 +158,22 @@ right connector from last child*/
       -moz-border-radius: 5px;
     }
 
+
+
     .tree li a.has_wife .husband{
-      left: 100px;
+      left: 0px;
     }
 
     .tree li a.has_wife .wife{
-      left: 149px;
+      left: 250px;
+    }
+
+    .tree li a.has_wife span{
+      width: 50px;
+      border-top: 1px solid #ccc;
+      position: absolute;
+      left: 200px;
+      top: 50%;
     }
 
 
@@ -189,9 +210,9 @@ right connector from last child*/
       <li>
         <a href="#">Parent</a>
         <ul>
-          <li>
+          <li class="has_wife">
             <!-- <a href="#">Child</a> -->
-            <a href="#" class="has_wife"><div class="husband">Child</div><div class="wife">Child-wife</div></a>
+            <a href="#" class="has_wife"><div class="husband">Child</div><span></span><div class="wife">Child-wife</div></a>
             <ul>
               <li><a href="#">Grand Child</a></li>
             </ul>
@@ -199,16 +220,17 @@ right connector from last child*/
           <li>
             <a href="#">Child</a>
             <ul>
-              <li>
+              <li class="has_wife">
                 <!-- <a href="#">Grand Child</a> -->
-                <a href="#" class="has_wife"><div class="husband">Grand Child</div><div class="wife">Grand Child-wife</div></a>
+                <a href="#" class="has_wife"><div class="husband">Grand Child</div><span></span><div class="wife">Grand Child-wife</div></a>
               </li>
-              <li>
-                <a href="#">Grand Child</a>
+              <li class="has_wife">
+                <!-- <a href="#">Grand Child</a> -->
+                <a href="#" class="has_wife"><div class="husband">Grand Child</div><span></span><div class="wife">Grand Child-wife</div></a>
                 <ul>
-                  <li>
+                  <li class="has_wife">
                     <!-- <a href="#">Great Grand Child</a> -->
-                    <a href="#" class="has_wife"><div class="husband">Great Grand Child</div><div class="wife">Great Grand Child-wife</div></a>
+                    <a href="#" class="has_wife"><div class="husband">Great Grand Child</div><span></span><div class="wife">Great Grand Child-wife</div></a>
                   </li>
                   <li><a href="#">Great Grand Child</a></li>
                   <li><a href="#">Great Grand Child</a></li>
