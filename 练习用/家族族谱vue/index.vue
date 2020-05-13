@@ -1,9 +1,7 @@
 <template>
   <div class="tree">
     <ul>
-      <!-- <div> -->
       <tree-node v-for="child in root.childNodes" :node="child" :key="child.name"></tree-node>
-      <!-- </div> -->
     </ul>
   </div>
 </template>
@@ -162,9 +160,20 @@ any siblings*/
   display: none;
 }
 
+.tree li li:only-child::before {
+  display: inline-block;
+  content: "";
+  position: absolute;
+  top: 0;
+  left: calc(50% - 10px);
+  border-left: 1px solid #ccc;
+  width: 0;
+  height: 20px;
+}
+
 /*Remove space from the top of single children*/
 .tree li:only-child {
-  padding-top: 0;
+  /* padding-top: 0; */
   position: absolute;
   left: 0px;
 }
@@ -184,6 +193,10 @@ right connector from last child*/
   -moz-border-radius: 0 5px 0 0;
 }
 
+.tree li.has_wife:last-child::before {
+  right: calc(50% + 125px);
+}
+
 .tree li:first-child::after {
   border-radius: 5px 0 0 0;
   -webkit-border-radius: 5px 0 0 0;
@@ -199,6 +212,10 @@ right connector from last child*/
   border-left: 1px solid #ccc;
   width: 0;
   height: 20px;
+}
+
+.tree ul.has_wife {
+  padding-right: 250px;
 }
 
 .tree ul .has_wife > ul::before {

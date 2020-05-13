@@ -8,13 +8,10 @@
       <div class="wife">{{node.wife}}</div>
     </a>
     <a href="#" v-else>{{node.name}}</a>
-    <ul v-if="node.childNodes">
-      <!-- <div :class="{
-      'has_wife': node.wife,
-      'ul-div': true
-    }"> -->
+    <ul :class="{
+      'has_wife': node.wife
+    }" v-if="node.childNodes">
       <tree-node v-for="child in node.childNodes" :node="child" :key="child.name"></tree-node>
-      <!-- </div> -->
     </ul>
   </li>
 </template>
