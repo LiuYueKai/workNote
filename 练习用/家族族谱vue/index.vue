@@ -1,95 +1,138 @@
 <template>
-  <div class="tree">
-    <ul>
-      <tree-node v-for="child in root.childNodes" :node="child" :key="child.name"></tree-node>
-    </ul>
+  <div class="root-div">
+    <div class="tree-div">
+      <tree :zoom="zoom" :root="root" :offset="offset" :outLine="false" :setOffset="setOffset"></tree>
+    </div>
+    <outline
+      :zoom="zoom"
+      :root="root"
+      :plus="plus"
+      :minus="minus"
+      :zoomLength="zoomLength"
+      :minZoom="minZoom"
+      :offset="offset"
+    ></outline>
   </div>
 </template>
 
 <script>
-import TreeNode from "./tree-node";
+import Tree from './tree'
+import Outline from './outline'
 export default {
-  name: "tree",
+  name: 'tree-index',
   components: {
-    TreeNode
+    Tree,
+    Outline
+  },
+
+  computed: {
+    zoomLength: function() {
+      return this.maxZoom - this.minZoom + 1
+    }
   },
   data() {
     return {
+      zoom: 5,
+      maxZoom: 8,
+      minZoom: 2,
+      offset: {
+        width: 10000,
+        left: 0,
+        right: 10000,
+        right1: 10000
+      },
       root: {
         childNodes: [
           {
-            name: "吉万里",
-            wife: "冯氏",
+            name: '吉万里',
+            id: '1',
+            wife: '冯氏',
             childNodes: [
               {
-                name: "吉会营",
-                wife: "高玉荣",
+                name: '吉会营',
+                id: '2',
+                wife: '高玉荣',
                 childNodes: [
                   {
-                    name: "吉广志",
+                    name: '吉广志',
+                    id: '3',
                     self: true,
-                    wife: "陈静",
+                    wife: '陈静',
                     childNodes: [
                       {
-                        name: "吉庆泽"
+                        name: '吉庆泽',
+                        id: '4'
                       },
                       {
-                        name: "吉小敏",
-                        sex: "women"
+                        name: '吉小敏',
+                        id: '5',
+                        sex: 'women'
                       }
                     ]
                   },
                   {
-                    name: "吉广安",
-                    wife: "聂琴",
+                    name: '吉广安',
+                    id: '6',
+                    wife: '聂琴',
                     childNodes: [
                       {
-                        name: "吉又嘉",
-                        sex: "women"
+                        name: '吉又嘉',
+                        id: '7',
+                        sex: 'women'
                       }
                     ]
                   },
                   {
-                    name: "吉圆圆",
-                    sex: "women"
+                    name: '吉圆圆',
+                    id: '8',
+                    sex: 'women'
                   }
                 ]
               },
               {
-                name: "吉思厂",
-                wife: "石氏",
+                name: '吉思厂',
+                id: '9',
+                wife: '石氏',
                 childNodes: [
                   {
-                    name: "吉平",
-                    sex: "women"
+                    name: '吉平',
+                    id: '10',
+                    sex: 'women'
                   },
                   {
-                    name: "吉南南",
-                    wife: "孙娜",
+                    name: '吉南南',
+                    id: '11',
+                    wife: '孙娜',
                     childNodes: [
                       {
-                        name: "吉庆奥"
+                        name: '吉庆奥',
+                        id: '12'
                       },
                       {
-                        name: "吉梦娇",
-                        sex: "women"
+                        name: '吉梦娇',
+                        id: '13',
+                        sex: 'women'
                       }
                     ]
                   },
                   {
-                    name: "吉娜",
-                    sex: "women"
+                    name: '吉娜',
+                    id: '14',
+                    sex: 'women'
                   },
                   {
-                    name: "吉北北",
-                    wife: "王晶",
+                    name: '吉北北',
+                    id: '15',
+                    wife: '王晶',
                     childNodes: [
                       {
-                        name: "吉庆恩"
+                        name: '吉庆恩',
+                        id: '16'
                       },
                       {
-                        name: "吉丹妮",
-                        sex: "women"
+                        name: '吉丹妮',
+                        id: '17',
+                        sex: 'women'
                       }
                     ]
                   }
@@ -99,218 +142,40 @@ export default {
           }
         ]
       }
-    };
+    }
+  },
+
+  methods: {
+    plus() {
+      if (this.zoom < this.maxZoom) {
+        this.zoom += 1
+      }
+    },
+    minus() {
+      if (this.zoom > this.minZoom) {
+        this.zoom -= 1
+      }
+    },
+    setOffset(offset) {
+      console.log('offset', offset)
+      this.offset = offset
+    }
   }
-};
+}
 </script>
 
-<style>
-.tree {
-  width: 7000px;
+<style scoped>
+.root-div {
+  width: 100%;
+  height: 100%;
+  overflow: auto;
 }
-.tree ul {
-  padding-top: 20px;
+
+.tree-div {
+  width: calc(100% - 300px);
+  height: 100%;
+  overflow: auto;
+  left: 300px;
   position: relative;
-
-  transition: all 0.5s;
-  -webkit-transition: all 0.5s;
-  -moz-transition: all 0.5s;
-}
-
-.tree li {
-  float: left;
-  text-align: center;
-  list-style-type: none;
-  position: relative;
-  padding: 20px 5px 0 5px;
-
-  transition: all 0.5s;
-  -webkit-transition: all 0.5s;
-  -moz-transition: all 0.5s;
-}
-
-/*We will use ::before and ::after to draw the connectors*/
-
-.tree li::before,
-.tree li::after {
-  content: "";
-  position: absolute;
-  top: 0;
-  right: 50%;
-  border-top: 1px solid #ccc;
-  width: 50%;
-  height: 20px;
-}
-
-.tree li.has_wife::after {
-  width: calc(50% + 130px);
-  left: calc(50% - 130px);
-}
-
-.tree li::after {
-  right: auto;
-  left: 50%;
-  border-left: 1px solid #ccc;
-}
-
-/*We need to remove left-right connectors from elements without  
-any siblings*/
-.tree li:only-child::after,
-.tree li:only-child::before {
-  display: none;
-}
-
-.tree li li:only-child::before {
-  display: inline-block;
-  content: "";
-  position: absolute;
-  top: 0;
-  left: calc(50% - 10px);
-  border-left: 1px solid #ccc;
-  width: 0;
-  height: 20px;
-}
-
-/*Remove space from the top of single children*/
-.tree li:only-child {
-  /* padding-top: 0; */
-  position: absolute;
-  left: 0px;
-}
-
-/*Remove left connector from first child and  
-right connector from last child*/
-.tree li:first-child::before,
-.tree li:last-child::after {
-  border: 0 none;
-}
-
-/*Adding back the vertical connector to the last nodes*/
-.tree li:last-child::before {
-  border-right: 1px solid #ccc;
-  border-radius: 0 5px 0 0;
-  -webkit-border-radius: 0 5px 0 0;
-  -moz-border-radius: 0 5px 0 0;
-}
-
-.tree li.has_wife:last-child::before {
-  right: calc(50% + 125px);
-}
-
-.tree li:first-child::after {
-  border-radius: 5px 0 0 0;
-  -webkit-border-radius: 5px 0 0 0;
-  -moz-border-radius: 5px 0 0 0;
-}
-
-/*Time to add downward connectors from parents*/
-.tree ul ul::before {
-  content: "";
-  position: absolute;
-  top: 0;
-  left: 50%;
-  border-left: 1px solid #ccc;
-  width: 0;
-  height: 20px;
-}
-
-.tree ul.has_wife {
-  padding-right: 250px;
-}
-
-.tree ul .has_wife > ul::before {
-  left: calc(50% - 130px);
-  top: -5px;
-  height: 25px;
-}
-
-.tree li a {
-  border: 1px solid #ccc;
-  padding: 5px 10px;
-  text-decoration: none;
-  color: #666;
-  font-family: arial, verdana, tahoma;
-  font-size: 11px;
-  display: inline-block;
-
-  width: 200px;
-  height: 100px;
-
-  border-radius: 5px;
-  -webkit-border-radius: 5px;
-  -moz-border-radius: 5px;
-
-  transition: all 0.5s;
-  -webkit-transition: all 0.5s;
-  -moz-transition: all 0.5s;
-
-  box-sizing: border-box;
-}
-
-.tree li a.has_wife {
-  width: 450px;
-  border: 0px;
-  padding: 0px;
-  position: relative;
-}
-
-.tree li a.has_wife div {
-  width: 200px;
-  height: 100px;
-  box-sizing: border-box;
-  position: absolute;
-
-  border: 1px solid #ccc;
-  padding: 5px 10px;
-  text-decoration: none;
-  color: #666;
-  font-family: arial, verdana, tahoma;
-  font-size: 11px;
-  display: inline-block;
-
-  border-radius: 5px;
-  -webkit-border-radius: 5px;
-  -moz-border-radius: 5px;
-}
-
-.tree li a.has_wife .husband {
-  left: 0px;
-}
-
-.tree li a.has_wife .wife {
-  left: 250px;
-}
-
-.tree li a.has_wife span {
-  width: 50px;
-  border-top: 1px solid #ccc;
-  position: absolute;
-  left: 200px;
-  top: 50%;
-}
-
-/*Time for some hover effects*/
-/*We will apply the hover effect the the lineage of the element also*/
-.tree li a:hover,
-.tree li a.has_wife:hover div,
-.tree li a:hover + ul li a,
-.tree li a:hover + ul li a.has_wife div {
-  background: #c8e4f8;
-  color: #000;
-  border: 1px solid #94a0b4;
-}
-
-.tree li a.has_wife:hover,
-.tree li a:hover + ul li a.has_wife {
-  background: none;
-  border: 0px;
-}
-
-/*Connector styles on hover*/
-.tree li a:hover + ul li::after,
-.tree li a:hover + ul li::before,
-.tree li a:hover + ul::before,
-.tree li a:hover + ul ul::before {
-  border-color: #94a0b4;
 }
 </style>
